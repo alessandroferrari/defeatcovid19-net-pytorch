@@ -16,11 +16,12 @@ def null_collate(batch):
     return images, labels
 
 class SubsetRandomDataLoader(DataLoader):
-    def __init__(self, dataset, indexes, batch_size):
+    def __init__(self, dataset, indexes, batch_size, drop_last=False):
         loader_params = dict(
             batch_size=batch_size,
             num_workers=1,
             pin_memory=True,
             collate_fn=null_collate
         )
-        super(SubsetRandomDataLoader, self).__init__(dataset=dataset, sampler=SubsetRandomSampler(indexes), **loader_params)
+        sampler = SubsetRandomSampler(indexes)
+        super(SubsetRandomDataLoader, self).__init__(dataset=dataset, sampler=sampler, drop_last=drop_last, **loader_params)

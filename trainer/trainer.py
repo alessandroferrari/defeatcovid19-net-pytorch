@@ -29,7 +29,7 @@ class Trainer:
         #     stratify=self.train_dataset.labels
         # )
 
-        self.train_loader = SubsetRandomDataLoader(dataset, train_idx, batch_size)
+        self.train_loader = SubsetRandomDataLoader(dataset, train_idx, batch_size, drop_last=True)
         self.validation_loader = SubsetRandomDataLoader(dataset, validation_idx, batch_size)
         
         print('Train set: {}'.format(len(train_idx)))
